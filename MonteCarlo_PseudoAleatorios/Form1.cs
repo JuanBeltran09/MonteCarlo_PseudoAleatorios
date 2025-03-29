@@ -24,6 +24,7 @@ namespace MonteCarlo_PseudoAleatorios
         private void btnGenerar_Click(object sender, EventArgs e)
         {
             dvgAleatorios.Rows.Clear();
+            chart1.Series[0].Points.Clear();
 
             int seed = Convert.ToInt32(txtSeed.Text);
             int a = Convert.ToInt32(txtA.Text);
@@ -59,12 +60,13 @@ namespace MonteCarlo_PseudoAleatorios
                 arrayUn[i] = arrayXn[i] / m;
 
                 dvgAleatorios.Rows.Add(i, arrayXn[i], arrayUn[i]);
+                chart1.Series[0].Points.AddXY(i, arrayUn[i]);
             }
 
-            if (unicos.Count == arrayXn.Length)
+            if (unicos.Count == 22220)
             {
                 repetidos.Text = "Se generaron correctamente los 22220 números aleatorios";
-                generado = false;
+                generado = true;
             }
             else
             {
@@ -81,7 +83,7 @@ namespace MonteCarlo_PseudoAleatorios
             chart20000.Series.Clear();
 
             if (!generado) {
-                advertencia.Text = "No has generado los números aleatorios";
+                advertencia.Text = "No has generado todos los números aleatorios";
                 advertencia.Visible = true;
             }
             else { advertencia.Visible = false; }
@@ -120,6 +122,8 @@ namespace MonteCarlo_PseudoAleatorios
             chart20.Series.Add(serie20);
             chart20.ChartAreas[0].AxisX.Title = "Rangos";
             chart20.ChartAreas[0].AxisY.Title = "Frecuencia";
+            chart20.ChartAreas[0].AxisY.Minimum = 0;
+            chart20.ChartAreas[0].AxisY.Maximum = 20;
 
             // Grafica para los 200 aleatorios
 
@@ -153,6 +157,8 @@ namespace MonteCarlo_PseudoAleatorios
             chart200.Series.Add(serie200);
             chart200.ChartAreas[0].AxisX.Title = "Rangos";
             chart200.ChartAreas[0].AxisY.Title = "Frecuencia";
+            chart200.ChartAreas[0].AxisY.Minimum = 0;
+            chart200.ChartAreas[0].AxisY.Maximum = 200;
 
             // Grafica para los 2000 aleatorios
 
@@ -186,6 +192,8 @@ namespace MonteCarlo_PseudoAleatorios
             chart2000.Series.Add(serie2000);
             chart2000.ChartAreas[0].AxisX.Title = "Rangos";
             chart2000.ChartAreas[0].AxisY.Title = "Frecuencia";
+            chart2000.ChartAreas[0].AxisY.Minimum = 0;
+            chart2000.ChartAreas[0].AxisY.Maximum = 2000;
 
             // Grafica para los 20000 aleatorios
 
@@ -219,6 +227,8 @@ namespace MonteCarlo_PseudoAleatorios
             chart20000.Series.Add(serie20000);
             chart20000.ChartAreas[0].AxisX.Title = "Rangos";
             chart20000.ChartAreas[0].AxisY.Title = "Frecuencia";
+            chart20000.ChartAreas[0].AxisY.Minimum = 0;
+            chart20000.ChartAreas[0].AxisY.Maximum = 20000;
 
         }
     }

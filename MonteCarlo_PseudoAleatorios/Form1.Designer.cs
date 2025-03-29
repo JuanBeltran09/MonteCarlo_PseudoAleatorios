@@ -31,20 +31,22 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.repetidos = new System.Windows.Forms.Label();
             this.dvgAleatorios = new System.Windows.Forms.DataGridView();
             this.iteracion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.xn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,25 +62,23 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.repetidos = new System.Windows.Forms.Label();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chart20 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chart200 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chart2000 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chart20000 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.btnGraficar = new System.Windows.Forms.Button();
             this.advertencia = new System.Windows.Forms.Label();
+            this.btnGraficar = new System.Windows.Forms.Button();
+            this.chart20000 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart2000 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart200 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart20 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dvgAleatorios)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart20)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart200)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart2000)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart20000)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2000)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart200)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart20)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -104,6 +104,33 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(24, 445);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(1443, 320);
+            this.chart1.TabIndex = 21;
+            this.chart1.Text = "chart1";
+            // 
+            // repetidos
+            // 
+            this.repetidos.BackColor = System.Drawing.Color.LightBlue;
+            this.repetidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.repetidos.Location = new System.Drawing.Point(21, 407);
+            this.repetidos.Name = "repetidos";
+            this.repetidos.Size = new System.Drawing.Size(680, 23);
+            this.repetidos.TabIndex = 20;
+            this.repetidos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dvgAleatorios
             // 
@@ -273,30 +300,82 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // repetidos
+            // advertencia
             // 
-            this.repetidos.BackColor = System.Drawing.Color.LightBlue;
-            this.repetidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.repetidos.Location = new System.Drawing.Point(21, 407);
-            this.repetidos.Name = "repetidos";
-            this.repetidos.Size = new System.Drawing.Size(680, 23);
-            this.repetidos.TabIndex = 20;
+            this.advertencia.BackColor = System.Drawing.Color.Yellow;
+            this.advertencia.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.advertencia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.advertencia.Location = new System.Drawing.Point(17, 736);
+            this.advertencia.Name = "advertencia";
+            this.advertencia.Size = new System.Drawing.Size(1305, 23);
+            this.advertencia.TabIndex = 5;
+            this.advertencia.Text = "label5";
+            this.advertencia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.advertencia.Visible = false;
             // 
-            // chart1
+            // btnGraficar
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(740, 17);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(607, 367);
-            this.chart1.TabIndex = 21;
-            this.chart1.Text = "chart1";
+            this.btnGraficar.Location = new System.Drawing.Point(1349, 346);
+            this.btnGraficar.Name = "btnGraficar";
+            this.btnGraficar.Size = new System.Drawing.Size(100, 33);
+            this.btnGraficar.TabIndex = 4;
+            this.btnGraficar.Text = "Graficar";
+            this.btnGraficar.UseVisualStyleBackColor = true;
+            this.btnGraficar.Click += new System.EventHandler(this.btnGraficar_Click);
+            // 
+            // chart20000
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chart20000.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart20000.Legends.Add(legend2);
+            this.chart20000.Location = new System.Drawing.Point(686, 377);
+            this.chart20000.Margin = new System.Windows.Forms.Padding(15);
+            this.chart20000.Name = "chart20000";
+            this.chart20000.Size = new System.Drawing.Size(636, 329);
+            this.chart20000.TabIndex = 3;
+            this.chart20000.Text = "chart5";
+            title1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            title1.BackImageAlignment = System.Windows.Forms.DataVisualization.Charting.ChartImageAlignmentStyle.Center;
+            title1.Name = "Title1";
+            title1.Text = "Distribución para 20000 Números";
+            this.chart20000.Titles.Add(title1);
+            // 
+            // chart2000
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.chart2000.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart2000.Legends.Add(legend3);
+            this.chart2000.Location = new System.Drawing.Point(20, 377);
+            this.chart2000.Margin = new System.Windows.Forms.Padding(15);
+            this.chart2000.Name = "chart2000";
+            this.chart2000.Size = new System.Drawing.Size(636, 329);
+            this.chart2000.TabIndex = 2;
+            this.chart2000.Text = "chart4";
+            title2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            title2.BackImageAlignment = System.Windows.Forms.DataVisualization.Charting.ChartImageAlignmentStyle.Center;
+            title2.Name = "Title1";
+            title2.Text = "Distribución para 2000 Números";
+            this.chart2000.Titles.Add(title2);
+            // 
+            // chart200
+            // 
+            chartArea4.Name = "ChartArea1";
+            this.chart200.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chart200.Legends.Add(legend4);
+            this.chart200.Location = new System.Drawing.Point(686, 18);
+            this.chart200.Margin = new System.Windows.Forms.Padding(15);
+            this.chart200.Name = "chart200";
+            this.chart200.Size = new System.Drawing.Size(636, 329);
+            this.chart200.TabIndex = 1;
+            this.chart200.Text = "chart3";
+            title3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            title3.BackImageAlignment = System.Windows.Forms.DataVisualization.Charting.ChartImageAlignmentStyle.Center;
+            title3.Name = "Title1";
+            title3.Text = "Distribución para 200 Números";
+            this.chart200.Titles.Add(title3);
             // 
             // chart20
             // 
@@ -317,83 +396,6 @@
             title4.Text = "Distribución para 20 Números";
             this.chart20.Titles.Add(title4);
             // 
-            // chart200
-            // 
-            chartArea4.Name = "ChartArea1";
-            this.chart200.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart200.Legends.Add(legend4);
-            this.chart200.Location = new System.Drawing.Point(686, 18);
-            this.chart200.Margin = new System.Windows.Forms.Padding(15);
-            this.chart200.Name = "chart200";
-            this.chart200.Size = new System.Drawing.Size(636, 329);
-            this.chart200.TabIndex = 1;
-            this.chart200.Text = "chart3";
-            title3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            title3.BackImageAlignment = System.Windows.Forms.DataVisualization.Charting.ChartImageAlignmentStyle.Center;
-            title3.Name = "Title1";
-            title3.Text = "Distribución para 200 Números";
-            this.chart200.Titles.Add(title3);
-            // 
-            // chart2000
-            // 
-            chartArea3.Name = "ChartArea1";
-            this.chart2000.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart2000.Legends.Add(legend3);
-            this.chart2000.Location = new System.Drawing.Point(20, 377);
-            this.chart2000.Margin = new System.Windows.Forms.Padding(15);
-            this.chart2000.Name = "chart2000";
-            this.chart2000.Size = new System.Drawing.Size(636, 329);
-            this.chart2000.TabIndex = 2;
-            this.chart2000.Text = "chart4";
-            title2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            title2.BackImageAlignment = System.Windows.Forms.DataVisualization.Charting.ChartImageAlignmentStyle.Center;
-            title2.Name = "Title1";
-            title2.Text = "Distribución para 2000 Números";
-            this.chart2000.Titles.Add(title2);
-            // 
-            // chart20000
-            // 
-            chartArea2.Name = "ChartArea1";
-            this.chart20000.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart20000.Legends.Add(legend2);
-            this.chart20000.Location = new System.Drawing.Point(686, 377);
-            this.chart20000.Margin = new System.Windows.Forms.Padding(15);
-            this.chart20000.Name = "chart20000";
-            this.chart20000.Size = new System.Drawing.Size(636, 329);
-            this.chart20000.TabIndex = 3;
-            this.chart20000.Text = "chart5";
-            title1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            title1.BackImageAlignment = System.Windows.Forms.DataVisualization.Charting.ChartImageAlignmentStyle.Center;
-            title1.Name = "Title1";
-            title1.Text = "Distribución para 20000 Números";
-            this.chart20000.Titles.Add(title1);
-            // 
-            // btnGraficar
-            // 
-            this.btnGraficar.Location = new System.Drawing.Point(1349, 346);
-            this.btnGraficar.Name = "btnGraficar";
-            this.btnGraficar.Size = new System.Drawing.Size(100, 33);
-            this.btnGraficar.TabIndex = 4;
-            this.btnGraficar.Text = "Graficar";
-            this.btnGraficar.UseVisualStyleBackColor = true;
-            this.btnGraficar.Click += new System.EventHandler(this.btnGraficar_Click);
-            // 
-            // advertencia
-            // 
-            this.advertencia.BackColor = System.Drawing.Color.Yellow;
-            this.advertencia.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.advertencia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.advertencia.Location = new System.Drawing.Point(17, 736);
-            this.advertencia.Name = "advertencia";
-            this.advertencia.Size = new System.Drawing.Size(1305, 23);
-            this.advertencia.TabIndex = 5;
-            this.advertencia.Text = "label5";
-            this.advertencia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.advertencia.Visible = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -404,15 +406,15 @@
             this.Text = "Form1";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dvgAleatorios)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart20)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart200)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart2000)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart20000)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2000)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart200)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart20)).EndInit();
             this.ResumeLayout(false);
 
         }
