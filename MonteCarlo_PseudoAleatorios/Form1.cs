@@ -16,7 +16,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace MonteCarlo_PseudoAleatorios
 {
-    public partial class Form1: Form
+    public partial class Form1 : Form
     {
         public Form1()
         {
@@ -45,7 +45,7 @@ namespace MonteCarlo_PseudoAleatorios
             un = xn / m;
 
             float[] arrayXn = new float[iterations + 1];
-            
+
 
             HashSet<float> unicos = new HashSet<float>();
 
@@ -59,7 +59,7 @@ namespace MonteCarlo_PseudoAleatorios
 
                 if (!agregado)
                 {
-                    break; 
+                    break;
                 }
 
                 arrayUn[i] = arrayXn[i] / m;
@@ -75,7 +75,7 @@ namespace MonteCarlo_PseudoAleatorios
             }
             else
             {
-                repetidos.Text = "Solo se generaron correctamente "+unicos.Count+" números aleatorios";
+                repetidos.Text = "Solo se generaron correctamente " + unicos.Count + " números aleatorios";
             }
 
         }
@@ -87,7 +87,8 @@ namespace MonteCarlo_PseudoAleatorios
             chart2000.Series.Clear();
             chart20000.Series.Clear();
 
-            if (!generado) {
+            if (!generado)
+            {
                 advertencia.Text = "No has generado todos los números aleatorios";
                 advertencia.Visible = true;
             }
@@ -247,7 +248,7 @@ namespace MonteCarlo_PseudoAleatorios
                 return;
             }
 
-            double a = Brent.FindRoot(x => r(x) - g(x), -1.5, -0.5);  
+            double a = Brent.FindRoot(x => r(x) - g(x), -1.5, -0.5);
             double b = Brent.FindRoot(x => r(x) - h(x), 0.0, 0.5);
 
             double aReal = GaussLegendreRule.Integrate(x => r(x) - f(x), a, b, 50);
@@ -297,6 +298,161 @@ namespace MonteCarlo_PseudoAleatorios
         private bool EstaDentro(double x, double y)
         {
             return (y >= f(x) && y <= r(x));
+        }
+
+        private void Graficar_Click(object sender, EventArgs e)
+        {
+
+            chartGrafico.Series["Series1"].Points.Clear();
+            chartGrafico.Series["Series2"].Points.Clear();
+            chartGrafico.Series["Series3"].Points.Clear();
+            chartGrafico.Series["Series4"].Points.Clear();
+
+            // Definir las coordenadas del rectángulo
+            double xMin = -0.866025;
+            double xMax = 0.338128;
+            double yMin = 0;
+            double yMax = 1.039111;
+
+            chartGrafico.Series["Series5"].Points.AddXY(xMin, yMax); 
+            chartGrafico.Series["Series5"].Points.AddXY(xMax, yMax);
+            chartGrafico2.Series["Series5"].Points.AddXY(xMin, yMax); 
+            chartGrafico2.Series["Series5"].Points.AddXY(xMax, yMax);
+            chartGrafico3.Series["Series5"].Points.AddXY(xMin, yMax); 
+            chartGrafico3.Series["Series5"].Points.AddXY(xMax, yMax);
+            chartGrafico4.Series["Series5"].Points.AddXY(xMin, yMax); 
+            chartGrafico4.Series["Series5"].Points.AddXY(xMax, yMax);
+
+            chartGrafico.Series["Series6"].Points.AddXY(xMin, yMin); 
+            chartGrafico.Series["Series6"].Points.AddXY(xMax, yMin);
+            chartGrafico2.Series["Series6"].Points.AddXY(xMin, yMin); 
+            chartGrafico2.Series["Series6"].Points.AddXY(xMax, yMin);
+            chartGrafico3.Series["Series6"].Points.AddXY(xMin, yMin); 
+            chartGrafico3.Series["Series6"].Points.AddXY(xMax, yMin);
+            chartGrafico4.Series["Series6"].Points.AddXY(xMin, yMin); 
+            chartGrafico4.Series["Series6"].Points.AddXY(xMax, yMin);
+
+            chartGrafico.Series["Series7"].Points.AddXY(xMin, yMin);
+            chartGrafico.Series["Series7"].Points.AddXY(xMin, yMax);
+            chartGrafico2.Series["Series7"].Points.AddXY(xMin, yMin); 
+            chartGrafico2.Series["Series7"].Points.AddXY(xMin, yMax);
+            chartGrafico3.Series["Series7"].Points.AddXY(xMin, yMin); 
+            chartGrafico3.Series["Series7"].Points.AddXY(xMin, yMax);
+            chartGrafico4.Series["Series7"].Points.AddXY(xMin, yMin);
+            chartGrafico4.Series["Series7"].Points.AddXY(xMin, yMax);
+
+            chartGrafico.Series["Series8"].Points.AddXY(xMax, yMin); 
+            chartGrafico.Series["Series8"].Points.AddXY(xMax, yMax);
+            chartGrafico2.Series["Series8"].Points.AddXY(xMax, yMin); 
+            chartGrafico2.Series["Series8"].Points.AddXY(xMax, yMax);
+            chartGrafico3.Series["Series8"].Points.AddXY(xMax, yMin); 
+            chartGrafico3.Series["Series8"].Points.AddXY(xMax, yMax);
+            chartGrafico4.Series["Series8"].Points.AddXY(xMax, yMin);
+            chartGrafico4.Series["Series8"].Points.AddXY(xMax, yMax);
+
+            for (double x = -0.866025; x <= 0; x += 0.001)
+            {
+                double y1 = x * x; // f(x) = x^2
+
+                if (y1 >= 0 && y1 <= 0.75)
+                {
+                    chartGrafico.Series["Series1"].Points.AddXY(x, y1);
+                    chartGrafico2.Series["Series1"].Points.AddXY(x, y1);
+                    chartGrafico3.Series["Series1"].Points.AddXY(x, y1);
+                    chartGrafico4.Series["Series1"].Points.AddXY(x, y1);
+                }
+            }
+
+            for (double x = -0.866025; x <= -0.678887; x += 0.001)
+            {
+                double y2 = -Math.Pow(x, 2) + 1.5; // f(x) = -x^2 + 1.5
+
+                if (y2 >= 0.75 && y2 <= 1.039111)
+                {
+                    chartGrafico.Series["Series2"].Points.AddXY(x, y2);
+                    chartGrafico2.Series["Series2"].Points.AddXY(x, y2);
+                    chartGrafico3.Series["Series2"].Points.AddXY(x, y2);
+                    chartGrafico4.Series["Series2"].Points.AddXY(x, y2);
+                }
+            }
+
+            for (double x = 0; x <= 0.338128; x += 0.001)
+            {
+                double y3 = 3 * Math.Sin(x); // f(x) = 3sin(x)
+
+                if (y3 >= 0 && y3 <= 0.995167)
+                {
+                    chartGrafico.Series["Series3"].Points.AddXY(x, y3);
+                    chartGrafico2.Series["Series3"].Points.AddXY(x, y3);
+                    chartGrafico3.Series["Series3"].Points.AddXY(x, y3);
+                    chartGrafico4.Series["Series3"].Points.AddXY(x, y3);
+                }
+            }
+
+            for (double x = -0.678887; x <= 0.3338128; x += 0.001)
+            {
+                double y4 = -Math.Pow(0.5 * x, 3) + 1; // f(x) = -(0.5x)^3 + 1
+
+                if (y4 >= 0.995167 && y4 <= 1.039111)
+                {
+                    chartGrafico.Series["Series4"].Points.AddXY(x, y4);
+                    chartGrafico2.Series["Series4"].Points.AddXY(x, y4);
+                    chartGrafico3.Series["Series4"].Points.AddXY(x, y4);
+                    chartGrafico4.Series["Series4"].Points.AddXY(x, y4);
+                }
+            }
+
+
+            // Crear la lista para almacenar las coordenadas
+            List<(double x, double y)> coordenadas = new List<(double, double)>();
+            List<(double x, double y)> coordenadas2= new List<(double, double)>();
+            List<(double x, double y)> coordenadas3= new List<(double, double)>();
+            List<(double x, double y)> coordenadas4= new List<(double, double)>();
+
+            // Generar 10 coordenadas aleatorias a partir de arrayUn
+            for (int i = 1; i < 20; i += 2)
+            {
+                coordenadas.Add((arrayUn[i - 1], arrayUn[i]));
+            }
+
+            // Generar 100 coordenadas aleatorias a partir de arrayUn
+            for (int i = 21; i < 220; i += 2)
+            {
+                coordenadas2.Add((arrayUn[i - 1], arrayUn[i]));
+            }
+
+            // Generar 1000coordenadas aleatorias a partir de arrayUn
+            for (int i = 221; i < 2220; i+= 2)
+            {
+                coordenadas3.Add((arrayUn[i - 1], arrayUn[i]));
+            }
+
+            // Generar 1000coordenadas aleatorias a partir de arrayUn
+            for (int i = 2221; i < 2220; i+= 2)
+            {
+                coordenadas4.Add((arrayUn[i - 1], arrayUn[i]));
+            }
+
+            // Agregar los puntos a los gráficos
+            foreach (var (x, y) in coordenadas)
+            {
+                chartGrafico.Series["SeriePuntos"].Points.AddXY(x, y);
+            }
+
+            foreach (var (x, y) in coordenadas2)
+            {
+                chartGrafico2.Series["SeriePuntos"].Points.AddXY(x, y);
+            }
+
+            foreach (var (x, y) in coordenadas3)
+            {
+                chartGrafico3.Series["SeriePuntos"].Points.AddXY(x, y);
+            }
+
+            foreach (var (x, y) in coordenadas4)
+            {
+                chartGrafico4.Series["SeriePuntos"].Points.AddXY(x, y);
+            }
         }
     }
 }
