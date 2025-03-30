@@ -31,10 +31,10 @@ namespace MonteCarlo_PseudoAleatorios
             dvgAleatorios.Rows.Clear();
             chart1.Series[0].Points.Clear();
 
-            int seed = Convert.ToInt32(txtSeed.Text);
-            int a = Convert.ToInt32(txtA.Text);
-            int b = Convert.ToInt32(txtB.Text);
-            int m = Convert.ToInt32(txtM.Text);
+            float seed = float.Parse(txtSeed.Text);
+            float a = float.Parse(txtA.Text);
+            float b = float.Parse(txtB.Text);
+            float m = float.Parse(txtM.Text);
             int iterations = 22220;
 
             //xn=(a*(xn-1)+b) mod m
@@ -248,57 +248,57 @@ namespace MonteCarlo_PseudoAleatorios
                 return;
             }
 
+            // Definición de funciones
+            Func<double, double> r = x => -(0.5 * x) * (0.5 * x) * (0.5 * x) + 1; // superior
+            Func<double, double> f = x => x * x; // inferior
+            Func<double, double> g = x => -x * x + 1.5; // izquierda
+            Func<double, double> h = x => 3 * Math.Sin(x); // derecha
+
+            // Límites de integración
             double a = Brent.FindRoot(x => r(x) - g(x), -1.5, -0.5);
             double b = Brent.FindRoot(x => r(x) - h(x), 0.0, 0.5);
 
+            // Área real entre r(x) y f(x)
             double aReal = GaussLegendreRule.Integrate(x => r(x) - f(x), a, b, 50);
+            areaReal.Text = ($"Área Real: {aReal}");
 
-            areaReal.Text = ($"Area Real: {aReal}");
-
+            // Conjuntos de pruebas
             int[] N = { 10, 100, 1000, 10000 };
+
             foreach (int n in N)
             {
-                double areaEstimada = MonteCarloArea(a, b, n);
+                Random rand = new Random();
+                int dentro = 0;
+                int offset = rand.Next(0, arrayUn.Length);
+
+                // Límites verticales para el rectángulo
+                double minY = Brent.FindRoot(x => f(x) - h(x), -1.0, 0.0);
+                double maxY = r(a);
+
+                for (int i = 0; i < n; i++)
+                {
+                    double x = a + (b - a) * arrayUn[(i + offset) % arrayUn.Length];
+                    double y = minY + (maxY - minY) * arrayUn[(i + offset) % arrayUn.Length];
+                    errorTeorico.Text = $"x: {x}, y: {y}";
+
+                    // Verificar si el punto está dentro del área
+                    if (y >= f(x) && y <= r(x)) dentro++;
+                }
+
+                ErrorReal.Text = $"dentro: {dentro}";
+
+                double areaRectangulo = (b - a) * (maxY - minY);
+                double areaEstimada = (dentro / (double)n) * areaRectangulo;
+
                 areaNumAleatorios.Text = areaEstimada.ToString();
+
                 double error = Math.Abs(aReal - areaEstimada);
                 double errorPorcentual = (error / aReal) * 100;
+
                 dvgResultados.Rows.Add(n, areaEstimada, error, errorPorcentual);
             }
         }
 
-        static Func<double, double> r = x => -(0.5 * x) * (0.5 * x) * (0.5 * x) + 1; // superior
-        static Func<double, double> f = x => x * x; // inferior
-        static Func<double, double> g = x => -x * x + 1.5; // izquierda
-        static Func<double, double> h = x => 3 * Math.Sin(x); // derecha
-
-        private double MonteCarloArea(double a, double b, int numPuntos)
-        {
-            Random rand = new Random();
-            int dentro = 0;
-            int offset = rand.Next(0, arrayUn.Length);
-            double minY = Brent.FindRoot(x => f(x) - h(x), -1.0, 0.0);
-            double maxY = r(a);
-
-            //areaReal.Text = ($"minY: {minY}, maxY: {maxY} , a: {a}, b: {b}");
-
-            for (int i = 0; i < numPuntos; i++)
-            {
-                double x = a + (b - a) * arrayUn[(i + offset) % arrayUn.Length];
-                double y = minY + (maxY - minY) * arrayUn[(i + offset) % arrayUn.Length];
-                errorTeorico.Text = ($"x: {x}, y: {y}");
-                if (EstaDentro(x, y)) dentro++;
-            }
-
-            ErrorReal.Text = ($"dentro: {dentro}");
-
-            double areaRectangulo = (b - a) * (maxY - minY);
-            return (dentro / (double)numPuntos) * areaRectangulo;
-        }
-
-        private bool EstaDentro(double x, double y)
-        {
-            return (y >= f(x) && y <= r(x));
-        }
 
         private void Graficar_Click(object sender, EventArgs e)
         {
@@ -409,28 +409,54 @@ namespace MonteCarlo_PseudoAleatorios
             List<(double x, double y)> coordenadas3= new List<(double, double)>();
             List<(double x, double y)> coordenadas4= new List<(double, double)>();
 
+            Random random = new Random();
+
             // Generar 10 coordenadas aleatorias a partir de arrayUn
             for (int i = 1; i < 20; i += 2)
             {
-                coordenadas.Add((arrayUn[i - 1]-0.866025, arrayUn[i]));
+                double valor = arrayUn[i - 1];
+                // Multiplica aleatoriamente por -1: 50% de probabilidad
+                if (random.NextDouble() < 0.5)
+                {
+                    valor *= -1;
+                }
+                coordenadas.Add((valor, arrayUn[i]));
             }
 
             // Generar 100 coordenadas aleatorias a partir de arrayUn
             for (int i = 21; i < 220; i += 2)
             {
-                coordenadas2.Add((arrayUn[i - 1]-0.866025, arrayUn[i]));
+                double valor = arrayUn[i - 1];
+                // Multiplica aleatoriamente por -1: 50% de probabilidad
+                if (random.NextDouble() < 0.5)
+                {
+                    valor *= -1;
+                }
+                coordenadas2.Add((valor, arrayUn[i]));
             }
 
             // Generar 1000coordenadas aleatorias a partir de arrayUn
             for (int i = 221; i < 2220; i+= 2)
             {
-                coordenadas3.Add((arrayUn[i - 1]-0.866025, arrayUn[i]));
+                double valor = arrayUn[i - 1];
+                // Multiplica aleatoriamente por -1: 50% de probabilidad
+                if (random.NextDouble() < 0.5)
+                {
+                    valor *= -1;
+                }
+                coordenadas3.Add((valor, arrayUn[i]));
             }
 
             // Generar 10000coordenadas aleatorias a partir de arrayUn
             for (int i = 2221; i < 22220; i+= 2)
             {
-                coordenadas4.Add((arrayUn[i - 1]-0.866025, arrayUn[i]));
+                double valor = arrayUn[i - 1];
+                // Multiplica aleatoriamente por -1: 50% de probabilidad
+                if (random.NextDouble() < 0.5)
+                {
+                    valor *= -1;
+                }
+                coordenadas4.Add((valor, arrayUn[i]));
             }
 
             // Agregar los puntos a los gráficos
