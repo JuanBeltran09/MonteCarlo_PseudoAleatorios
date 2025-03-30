@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using MathNet .Numerics .RootFinding;
+using MathNet.Numerics.Integration;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
+
 
 namespace MonteCarlo_PseudoAleatorios
 {
@@ -230,6 +235,68 @@ namespace MonteCarlo_PseudoAleatorios
             chart20000.ChartAreas[0].AxisY.Minimum = 0;
             chart20000.ChartAreas[0].AxisY.Maximum = 20000;
 
+        }
+
+        private void btnCalcularArea_Click(object sender, EventArgs e)
+        {
+            dvgResultados.Rows.Clear();
+
+            if (!generado)
+            {
+                MessageBox.Show("No has generado todos los números aleatorios", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            double a = Brent.FindRoot(x => r(x) - g(x), -1.5, -0.5);  
+            double b = Brent.FindRoot(x => r(x) - h(x), 0.0, 0.5);
+
+            double aReal = GaussLegendreRule.Integrate(x => r(x) - f(x), a, b, 50);
+
+            areaReal.Text = ($"Area Real: {aReal}");
+
+            int[] N = { 10, 100, 1000, 10000 };
+            foreach (int n in N)
+            {
+                double areaEstimada = MonteCarloArea(a, b, n);
+                areaNumAleatorios.Text = areaEstimada.ToString();
+                double error = Math.Abs(aReal - areaEstimada);
+                double errorPorcentual = (error / aReal) * 100;
+                dvgResultados.Rows.Add(n, areaEstimada, error, errorPorcentual);
+            }
+        }
+
+        static Func<double, double> r = x => -(0.5 * x) * (0.5 * x) * (0.5 * x) + 1; // superior
+        static Func<double, double> f = x => x * x; // inferior
+        static Func<double, double> g = x => -x * x + 1.5; // izquierda
+        static Func<double, double> h = x => 3 * Math.Sin(x); // derecha
+
+        private double MonteCarloArea(double a, double b, int numPuntos)
+        {
+            Random rand = new Random();
+            int dentro = 0;
+            int offset = rand.Next(0, arrayUn.Length);
+            double minY = Brent.FindRoot(x => f(x) - h(x), -1.0, 0.0);
+            double maxY = r(a);
+
+            //areaReal.Text = ($"minY: {minY}, maxY: {maxY} , a: {a}, b: {b}");
+
+            for (int i = 0; i < numPuntos; i++)
+            {
+                double x = a + (b - a) * arrayUn[(i + offset) % arrayUn.Length];
+                double y = minY + (maxY - minY) * arrayUn[(i + offset) % arrayUn.Length];
+                errorTeorico.Text = ($"x: {x}, y: {y}");
+                if (EstaDentro(x, y)) dentro++;
+            }
+
+            ErrorReal.Text = ($"dentro: {dentro}");
+
+            double areaRectangulo = (b - a) * (maxY - minY);
+            return (dentro / (double)numPuntos) * areaRectangulo;
+        }
+
+        private bool EstaDentro(double x, double y)
+        {
+            return (y >= f(x) && y <= r(x));
         }
     }
 }
