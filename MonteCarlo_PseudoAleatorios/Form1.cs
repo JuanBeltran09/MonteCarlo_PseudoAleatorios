@@ -412,25 +412,25 @@ namespace MonteCarlo_PseudoAleatorios
             // Generar 10 coordenadas aleatorias a partir de arrayUn
             for (int i = 1; i < 20; i += 2)
             {
-                coordenadas.Add((arrayUn[i - 1], arrayUn[i]));
+                coordenadas.Add((arrayUn[i - 1]-0.866025, arrayUn[i]));
             }
 
             // Generar 100 coordenadas aleatorias a partir de arrayUn
             for (int i = 21; i < 220; i += 2)
             {
-                coordenadas2.Add((arrayUn[i - 1], arrayUn[i]));
+                coordenadas2.Add((arrayUn[i - 1]-0.866025, arrayUn[i]));
             }
 
             // Generar 1000coordenadas aleatorias a partir de arrayUn
             for (int i = 221; i < 2220; i+= 2)
             {
-                coordenadas3.Add((arrayUn[i - 1], arrayUn[i]));
+                coordenadas3.Add((arrayUn[i - 1]-0.866025, arrayUn[i]));
             }
 
-            // Generar 1000coordenadas aleatorias a partir de arrayUn
-            for (int i = 2221; i < 2220; i+= 2)
+            // Generar 10000coordenadas aleatorias a partir de arrayUn
+            for (int i = 2221; i < 22220; i+= 2)
             {
-                coordenadas4.Add((arrayUn[i - 1], arrayUn[i]));
+                coordenadas4.Add((arrayUn[i - 1]-0.866025, arrayUn[i]));
             }
 
             // Agregar los puntos a los gráficos
